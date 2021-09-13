@@ -116,12 +116,12 @@ function displayStudent(student) {
   //   student.lastName
   // }_${student.firstName[0]}.png`;
   if (student.lastName.includes("-")) {
-    clone.querySelector("[data-field=image] img").src = `images/${student.lastName.substring(student.lastName.indexOf("-") + 1)}_${student.firstName[0]}.png`;
+    clone.querySelector("[data-field=image] img").src = `../images/${student.lastName.substring(student.lastName.indexOf("-") + 1)}_${student.firstName[0]}.png`;
   } else {
-    clone.querySelector("[data-field=image] img").src = `images/${student.lastName}_${student.firstName[0]}.png`;
+    clone.querySelector("[data-field=image] img").src = `../images/${student.lastName}_${student.firstName[0]}.png`;
   }
   if (student.lastName.includes("Patil")) {
-    clone.querySelector("[data-field=image] img").src = `images/${student.lastName}_${student.firstName}.png`;
+    clone.querySelector("[data-field=image] img").src = `../images/${student.lastName}_${student.firstName}.png`;
   }
   //   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);

@@ -1,43 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Cleaning Hogwarts Data</title>
-</head>
-<body>
-    <h1>Hogwarts Students</h1>
+  </head>
+  <body>
+    <h1>Hogwarts School of Witchcraft and Wizardry</h1>
+    <div id="fsContainer">
+      <div id="filterContainer">
+        <label>Filter:</label><br />
+        <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button><br />
+        <button class="filter" data-action="filter" data-filter="Ravenclaw">Ravenclaw</button><br />
+        <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button><br />
+        <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button><br />
+        <button class="filter" data-action="filter" data-filter="BloodType">Blood Type</button><br />
+        <button class="filter" data-action="filter" data-filter="Prefect">Prefect</button><br />
+        <button class="filter" data-action="filter" data-filter="Expelled">Expelled</button><br />
+        <button class="filter" data-action="filter" data-filter="Squad">The Inquisitorial Squad</button><br />
+        <button class="filter" data-action="filter" data-filter="all">All Students</button><br />
+      </div>
+    </div>
 
-    <table id="list">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Middle Name</th>
-          <th>Last Name</th>
-          <th>Nickname</th>
-          <th>Image</th>
-          <th>House</th>
-        </tr>
-      </thead>
-      <tbody>
-      
-      </tbody>
-    </table>
+    <div id="paper">
+      <div id="pattern">
+        <div id="content">
+          <h2>Hogwarts Students</h2>
 
-    <template id="student">
-      <tr>
-        <td data-field="name">FIRST NAME</td>
-        <td data-field="middle">MIDDLE NAME</td>
-        <td data-field="last">LAST NAME</td>
-        <td data-field="nickname">NICKNAME</td>
+          <table id="list">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Nickname</th>
+                <th>Image</th>
+                <th>House</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
 
-        <td data-field="image"><img class="image" src="" alt=""></td>
-        <td data-field="house">HOUSE</td>
-     
-      </tr>
-    </template>
-<script src="script.js"></script>
-</body>
+          <template id="student">
+            <tr>
+              <td data-field="name">FIRST NAME</td>
+              <td data-field="middle">MIDDLE NAME</td>
+              <td data-field="last">LAST NAME</td>
+              <td data-field="nickname">NICKNAME</td>
+
+              <td data-field="image"><img class="image" src="" alt="" /></td>
+              <td data-field="house">HOUSE</td>
+            </tr>
+          </template>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>

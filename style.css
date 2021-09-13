@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  width: 100%;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* styling paper */
+#paper {
+  width: 800px;
+  height: 4630px;
+  position: relative;
+  margin: 20px auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: white;
+  box-shadow: 0px 0px 5px 0px #888;
+}
+
+/* styling red vertical line */
+#paper::before {
+  content: "";
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 40px;
+  background-color: rgba(255, 0, 0, 0.6);
+}
+
+/* styling blue horizontal lines */
+#pattern {
+  height: 100%;
+  background-image: repeating-linear-gradient(white 0px, white 20px, teal 20px);
+}
+/* styling text content */
+#content {
+  padding-top: 6px;
+  padding-left: 56px;
+  padding-right: 16px;
+  line-height: 25px;
+  font-size: 19px;
+  letter-spacing: 1px;
+  word-spacing: 5px;
+}
+
+h1 {
+  font-family: "Cinzel Decorative", cursive;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 3vw;
+  margin-top: 3vw;
+  padding: 2vw;
+}
+h2 {
+  font-family: "Cinzel Decorative", cursive;
+  /* font-weight: 900;
+    font-size: 3rem; */
+  text-align: center;
+  margin-bottom: 3vw;
+  margin-top: 3vw;
+  padding: 2vw;
+}
+
+#list {
+  text-align: center;
+}
+
+th {
+  padding: 2vw;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  color: black;
+
+  font-size: 1.2vw;
+}
+
+#filterContainer {
+  position: absolute;
+  padding: 5vw;
+}
+
+label {
+  font-family: "Cinzel Decorative", cursive;
+  text-align: center;
+  margin-bottom: 3vw;
+  margin-top: 3vw;
+
+  padding-bottom: 3vw;
+}
