@@ -1,16 +1,18 @@
 "use strict";
 
-
 window.addEventListener("DOMContentLoaded", start);
 
 const allStudents = [];
 
 function start() {
   console.log("ready");
-
+  registerButtons();
   loadJSON();
 }
 
+function registerButtons() {
+  document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
+}
 function loadJSON() {
   console.log("loadJSON");
   fetch("https://petlatkea.dk/2020/hogwarts/students.json")
@@ -37,9 +39,6 @@ function prepareObjects(jsonData) {
 
     let fullname = elm.fullname.trim();
     let house = elm.house.trim();
-
-
-
     let firstName = (student.firstName = fullname.substring(fullname.lastIndexOf(), fullname.indexOf(" ")));
 
     if (fullname.indexOf(" ") >= 0) {
@@ -82,17 +81,42 @@ function prepareObjects(jsonData) {
     allStudents.push(student);
   });
 
-  displayList();
+  displayList(allStudents);
   console.log("allStudents", allStudents);
 }
 
-                        function displayList() {
-                          // clear the list
-                          document.querySelector("#studentlist").innerHTML = "";
+function selectFilter(event) {
+  const filter = event.target.dataset.filter;
+  console.log(`user selected ${filter}`);
+  filterList(filter);
+}
 
-                          // build a new list
-                          allStudents.forEach(displayStudent);
-                        }
+function filterList(studentHouse) {
+  let filteredList = allStudents;
+  if (studentHouse === "Gryffindor") {
+    filteredList = allStudents.filter(isGryffindor);
+  } else if (studentHouse === "Slytherin") {
+    filteredList = allStudents.filter(isSlytherin);
+  } else if (studentHouse === "Hufflepuff") {
+    filteredList = allStudents.filter(isHufflepuff);
+  } else if (studentHouse === "Ravenclaw") {
+    filteredList = allStudents.filter(isRavenclaw);
+  }
+
+  displayList(filteredList);
+}
+function isGryffindor(student) {
+  return student.house === "Gryffindor";
+}
+function isSlytherin(student) {
+  return student.house === "Slytherin";
+}
+function isHufflepuff(student) {
+  return student.house === "Hufflepuff";
+}
+function isRavenclaw(student) {
+  return student.house === "Ravenclaw";
+}
 
 function displayStudent(student) {
   //   // create clone
@@ -118,4 +142,10 @@ function displayStudent(student) {
   //   // append clone to list
   document.querySelector("#studentlist").appendChild(clone);
 }
+function displayList(students) {
+  // clear the list
+  document.querySelector("#studentlist").innerHTML = "";
 
+  // build a new list
+  students.forEach(displayStudent);
+}
