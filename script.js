@@ -6,16 +6,16 @@ window.addEventListener("DOMContentLoaded", start);
 
 const allStudents = [];
 
+const settings = {
+  filter: "all",
+  sortBy: "firstName",
+  sortDir: "asc",
+};
 function start() {
   console.log("ready");
   registerButtons();
   loadJSON();
 }
-// const settings = {
-//   filter: "all",
-//   sortBy: "name",
-//   sortDir: "asc",
-// };
 //buttons
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
@@ -93,22 +93,28 @@ function prepareObjects(jsonData) {
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
   console.log(`user selected ${filter}`);
-  filterList(filter);
+  // filterList(filter);
+  setFilter(filter);
 }
 
-function filterList(studentHouse) {
-  let filteredList = allStudents;
-  if (studentHouse === "Gryffindor") {
+function setFilter(filter){
+ settings.filterBy = filter;
+  buildList();
+}
+
+function filterList(filteredList) {
+  // let filteredList = allStudents;
+  if (settings.filterBy === "Gryffindor") {
     filteredList = allStudents.filter(isGryffindor);
-  } else if (studentHouse === "Slytherin") {
+  } else if (settings.filterBy === "Slytherin") {
     filteredList = allStudents.filter(isSlytherin);
-  } else if (studentHouse === "Hufflepuff") {
+  } else if (settings.filterBy === "Hufflepuff") {
     filteredList = allStudents.filter(isHufflepuff);
-  } else if (studentHouse === "Ravenclaw") {
+  } else if (settings.filterBy === "Ravenclaw") {
     filteredList = allStudents.filter(isRavenclaw);
   }
 
-  displayList(filteredList);
+  return filteredList;
 }
 function isGryffindor(student) {
   return student.house === "Gryffindor";
@@ -137,13 +143,19 @@ function selectSort(event) {
     event.target.dataset.sortDirection = "asc";
   }
   console.log(`user selected ${sortBy} -  ${sortDir}`);
-  sortList(sortBy, sortDir);
+  setSort(sortBy, sortDir);
 }
 
-function sortList(sortBy, sortDir){
-  let sortedList = allStudents;
+function setSort(sortBy, sortDir){
+  settings.sortBy = sortBy;
+  settings.sortDir = sortDir;
+  buildList();
+}
+
+function sortList(sortedList){
+  // let sortedList = allStudents;
   let direction = 1;
-  if (sortDir ==="desc"){
+  if (settings.sortDir ==="desc"){
     direction= -1;
   }else{
     direction = 1;
@@ -152,16 +164,21 @@ function sortList(sortBy, sortDir){
   sortedList = sortedList.sort(sortByProperty);
 
 function sortByProperty(studentA, studentB){
-  console.log(`sortBy is ${sortBy}`);
-  if (studentA[sortBy]<studentB[sortBy]){
+  console.log(`sortBy is ${settings.sortBy}`);
+  if (studentA[settings.sortBy]<studentB[settings.sortBy]){
     return -1 * direction;
   }else{
     return 1 * direction;
   }
 }
-displayList(sortedList);
+return sortedList;
 }
+function buildList(){
+  const currentList = filterList(allStudents);
+   const sortedlist = sortList(currentList);
+  displayList(sortedlist);
 
+}
 // function sortByLastName(studentA, studentB){
 //   if (studentA.lastName<studentB.lastName){
 //     return -1;
