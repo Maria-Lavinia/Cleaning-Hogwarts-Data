@@ -81,6 +81,8 @@
             <img class="modal-img" src="" alt="" />
           </div>
           <h2 id="modal-squad" data-field="squad"></h2>
+          <h2 id="modal-prefect" data-field="prefect"></h2>
+
           <h1 class="modal-name">
             <span id="modal-firstname"></span>
             <span id="modal-middlename"></span>
@@ -108,7 +110,7 @@
             <img class="student_img"  src="" alt="" />
           </div>
         
-          <span> <h2 class="prefect" data-field="prefect">👌🏻</h2></span>
+          <span> <h2 class="prefect" data-field="prefect" data-prefect="false"></h2></span>
           <span> <h2 class="squad" data-field="squad" data-squad="false"></h2></span>
           <div class="name">
             <span class="firstname" data-field="firstname">First Name</span>
@@ -124,14 +126,14 @@
     <div id="onlysixprefects" class="dialog">
       <div class="dialogcontent">
         <button class="closebutton">X</button>
-        <h1>You can only have 2 prefects in total!</h1>
-        <h2>Remove one, before you appoint more</h2>
+        <h1>You can only have two Prefects in total!</h1>
+        <h2>Remove one, before you appoint more!</h2>
         <p>
-          <button data-action="remove1">Remove</button>
+          <button class="removeA">Remove A</button>
           <span class="student1">NAME, HOUSE</span>
         </p>
         <p>
-          <button data-action="remove2">Remove</button>
+          <button class="removeB">Remove B</button>
           <span class="student2">NAME, HOUSE</span>
         </p>
       </div>
@@ -140,10 +142,10 @@
     <div id="onlyonehouse" class="dialog">
       <div class="dialogcontent">
         <button class="closebutton">X</button>
-        <h1>You can only have one prefects of each house</h1>
-        <h2>Remove the other if you want to appoint a new one</h2>
+        <h1>You can only have two Prefects of each house.</h1>
+        <h2>Remove the other, if you want to appoint a new one!</h2>
         <p>
-          <button data-action="remove1">Remove</button>
+          <button class="remove">Remove</button>
           <span class="student1">NAME, HOUSE</span>
         </p>
       </div>

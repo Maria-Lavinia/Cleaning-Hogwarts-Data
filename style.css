@@ -9,7 +9,7 @@
   font-family: "Cinzel Decorative", cursive;
 }
 body {
-  background: radial-gradient(ellipse at bottom, #590B10 0%, #590B11 100%);
+  background: radial-gradient(ellipse at bottom, #0E1A40 0%, #0E1A40 100%);
   color: white;
 }
 
@@ -125,7 +125,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-content: space-around;
-  padding: 1em 1em 1em 1em;
+  padding: 1em 3em 3em 1em;
   width: 30rem;
   height: 30rem;
   margin: auto;
@@ -208,6 +208,10 @@ object {
   cursor: pointer;
 }
 /*-----------prefect------------------*/
+[data-field="prefect"]::after{
+  content: "🎖";
+}
+
 [data-field="prefect"][data-prefect="false"] {
   filter: grayscale(100%);
   cursor: pointer;
@@ -227,6 +231,7 @@ object {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 2em;
 }
 
 .dialogcontent {

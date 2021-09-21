@@ -16,8 +16,8 @@ const Student = {
   blood: "",
   gender: "",
   squad:false,
-  blood:"",
-  status: "Student Status: Not Expelled",
+  status: "Not Expelled",
+  prefect: false,
 };
 const settings = {
   filter: "all",
@@ -222,8 +222,6 @@ function displayStudent(student) {
   }
 
   //make squad
-
-
   clone.querySelector("[data-field=squad]").dataset.squad = student.squad;
   clone.querySelector("[data-field=squad]").addEventListener("click", makeSquad);
 
@@ -238,8 +236,98 @@ function displayStudent(student) {
     buildList();
 
   }
+// make prefect
+
+  clone.querySelector("[data-field=prefect]").dataset.prefect = student.prefect;
+  clone.querySelector("[data-field=prefect]").addEventListener("click", makePrefect);
+
+function makePrefect(){
+  if (student.prefect === true){
+    student.prefect = false;
+  }else{
+    tryToMakeAPrefect(student)
+   
+  }
+  buildList();
+}
+
+function tryToMakeAPrefect(selectedStudent){
+
+  const prefects = allStudents.filter(student => student.prefect);
+  const numberOfPrefects = prefects.length;
+  const other = prefects.filter(student => student.house === selectedStudent.house).shift();
+  if (other !== undefined){
+    console.log("there can only be one prefect of each house")
+    removeOther(other)
+  }else if (numberOfPrefects>=2){
+    console.log("there can only be 2 winners")
+    removeAorB(prefects[0], prefects[1]);
+  }else{
+    makePrefect(selectedStudent);
+  }
+ 
+
+function removeOther(other){
+
+document.querySelector("#onlyonehouse").classList.add("show");
+document.querySelector("#onlyonehouse .closebutton").addEventListener("click", closeDialog);
+document.querySelector("#onlyonehouse .remove").addEventListener("click", clickRemoveOther);
 
 
+function closeDialog(){
+  document.querySelector("#onlyonehouse").classList.remove("show");
+  document.querySelector("#onlyonehouse .remove").removeEventListener("click", clickRemoveOther);
+  document.querySelector("#onlyonehouse .closebutton").removeEventListener("click", closeDialog);
+}
+
+function clickRemoveOther(){
+    removePrefect(other);
+    makePrefect(selectedStudent);
+    buildList();
+closeDialog();
+}
+
+}
+function removeAorB(prefectA, prefectB){
+  document.querySelector("#onlysixprefects").classList.add("show");
+  document.querySelector("#onlysixprefects .closebutton").addEventListener("click", closeDialog);
+  document.querySelector("#onlysixprefects .removeA").addEventListener("click", clickRemoveA);
+  document.querySelector("#onlysixprefects .removeB").addEventListener("click", clickRemoveB);
+  
+
+
+  function closeDialog(){
+    document.querySelector("#onlysixprefects").classList.remove("show");
+  document.querySelector("#onlysixprefects .closebutton").removeEventListener("click", closeDialog);
+  document.querySelector("#onlysixprefects .removeA").removeEventListener("click", clickRemoveA);
+  document.querySelector("#onlysixprefects .removeB").removeEventListener("click", clickRemoveB);
+  
+  }
+  function clickRemoveA(){
+
+    removePrefect(prefectA);
+    makePrefect(selectedStudent);
+    buildList();
+    closeDialog();
+  }
+
+function clickRemoveB(){
+  
+  removePrefect(prefectB);
+  makePrefect(selectedStudent);
+  buildList();
+  closeDialog();
+}
+
+
+}
+function removePrefect(prefectStudent){
+  prefectStudent.prefect = false;
+}
+function makePrefect(student){
+  student.prefect = true;
+}
+}
   // modal
 
   clone.querySelector(".img_container").addEventListener("click", modal);
