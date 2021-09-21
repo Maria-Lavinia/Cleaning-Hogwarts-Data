@@ -349,7 +349,12 @@ function makePrefect(student){
     } else if (student.squad === true){
       squadStatus.style.filter = "grayscale(0)";
     }
-    
+    let prefectStatus = document.querySelector("#modal-prefect");
+     if (student.prefect === false){
+      prefectStatus.style.filter = "grayscale(1)";
+    } else if (student.prefect=== true){
+      prefectStatus.style.filter = "grayscale(0)";
+    }
     modal.querySelector("#modal-gender").textContent = "Gender: " + student.gender
     modal.querySelector(".modal-img").src = `images/${student.lastName.substring(student.lastName.indexOf("-") + 1).toLowerCase()}_${student.firstName[0].toLowerCase()}.png`;
     modal.querySelector(".modal-house").textContent = student.house;
