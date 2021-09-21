@@ -126,15 +126,17 @@
     <div id="onlysixprefects" class="dialog">
       <div class="dialogcontent">
         <button class="closebutton">X</button>
+        <h1 class="title">Warning!</h1>
         <h1>You can only have two Prefects in total!</h1>
         <h2>Remove one, before you appoint more!</h2>
         <p>
-          <button class="removeA">Remove A</button>
-          <span class="student1">NAME, HOUSE</span>
+          <button class="removeA">Remove <span data-field="prefectA"></span></button>
+          
         </p>
+       
         <p>
-          <button class="removeB">Remove B</button>
-          <span class="student2">NAME, HOUSE</span>
+          <button class="removeB">Remove <span data-field="prefectB"></span></button>
+      
         </p>
       </div>
     </div>
@@ -145,9 +147,20 @@
         <h1>You can only have two Prefects of each house.</h1>
         <h2>Remove the other, if you want to appoint a new one!</h2>
         <p>
-          <button class="remove">Remove</button>
-          <span class="student1">NAME, HOUSE</span>
+          <button class="remove">Remove <span data-field="otherPrefect"></span></button>
+          
         </p>
+      </div>
+    </div>
+
+    <!--not allowed to be in the squad-->
+    <div id="notAllowed" class="dialog">
+      <div class="dialogcontent">
+        <button class="closebutton">X</button>
+        <h1 class="title">Oops!</h1>
+        <h1>This student is not allowed to be part of the Inquisitorial Squad!</h1>
+        
+        <button class="remove">OK</button>
       </div>
     </div>
 

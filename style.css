@@ -235,28 +235,32 @@ object {
 }
 
 .dialogcontent {
-  background-color: #1b2735;
+  background-color: #7f0909;
   padding: 10vw 8vw 8vw 8vw;
   position: relative;
   outline: 2px solid;
   outline-offset: -20px;
-  outline-color: vwhite;
+  outline-color: white;
+  border-radius: 2em;
 }
 
 .dialog h1 {
   margin: 0;
   font-size: 130%;
 }
+.title{
+  text-align: center;
+  padding-bottom: 1vw;
+}
 
 .dialog h2 {
   margin: 0.5em 0;
   font-size: 110%;
   font-weight: lighter;
+  text-align: center;
 }
 
 .dialog .closebutton {
-  -moz-appearance: none;
-  appearance: none;
   position: absolute;
   top: 4vw;
   right: 4vw;
@@ -264,15 +268,29 @@ object {
   background-color: transparent;
   font-size: 90%;
   color: white;
+  
 }
 
 .dialog .closebutton:hover {
   color: black;
 }
-[data-field="prefect"][data-prefect="false"] {
-  filter: grayscale(100%);
-  cursor: pointer;
+.removeA, .removeB, .remove{
+  margin-left: 178px;
+  margin-top: 10px;
+  align-items: center;
+  display: inline;
+  background-color: white;
+  color: black;
+  border: 2px solid #0E1A40; 
+  border-radius: 2em;
+  padding: 0.5vw; 
+ 
 }
+
+.removeA:hover, .removeB:hover, remove:hover{
+  opacity: 50%;
+}
+
 /*----------------expel----------------*/
 
 [data-field="expel"] {
@@ -284,13 +302,6 @@ object {
   opacity: 100%;
   cursor: pointer;
 }
-/* p[data-field=status]::before{
-  content: "Not expelled";
-}
-
-p[data-field=status][data-status=true]::before{
-  content: "Expelled";
-} */
 
 /*-------------------grid--------------*/
 .grid-whole-page {
