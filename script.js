@@ -184,6 +184,9 @@ function buildList() {
   displayList(sortedlist);
 }
 
+
+// template
+
 function displayStudent(student) {
   //   // create clone
   const clone = document.querySelector("template#studentTemplate").content.cloneNode(true);
@@ -222,17 +225,35 @@ function displayStudent(student) {
 
   //make squad
   clone.querySelector("[data-field=squad]").dataset.squad = student.squad;
-  clone.querySelector("[data-field=squad]").addEventListener("click", makeSquad);
+  clone.querySelector("[data-field=squad]").addEventListener("click", makeSquadSlytherin);
 
-  function makeSquad() {
-    if (student.squad === true) {
-      student.squad = false;
-    } else if ((student.house = "Slytherin")) {
-      student.squad = true;
+  function makeSquadSlytherin() {
+    if (student.house === "Slytherin") {
+      makeSquad(student);
     } else {
-      student.squad = true;
+     cannotSquad();
+    }
+   
+  }
+
+  function makeSquad(){
+    if (student.squad=== true){
+      student.squad = false;
+    }else{
+      student.squad=true;
     }
     buildList();
+  }
+
+  function cannotSquad(){
+    document.querySelector("#notAllowed").classList.add("show");
+    document.querySelector(" #notAllowed .closebutton").addEventListener("click",closeDialog);
+
+    function closeDialog(){
+     
+      document.querySelector("#notAllowed").classList.remove("show");
+      document.querySelector("#notAllowed .closebutton").removeEventListener("click",closeDialog);
+    }
   }
   // make prefect
 
