@@ -12,10 +12,13 @@
       <div id="stars"></div>
       <div id="stars2"></div>
       <div id="stars3"></div>
-
+      
       <!--header-->
       <div class="header">Hogwarts School of Witchcraft and Wizardry</div>
       <article>
+      <br> <br>
+        <input id="searchBar"type="text" placeholder="Search for a student" ><span class="emoji">🔎</span>
+        </div>
         <!--filter houses-->
         <div id="filter_banner">
           <button class="filter" data-action="filter" data-filter="Gryffindor">
@@ -33,10 +36,16 @@
           <button class="filter" data-action="filter" data-filter="Expelled">
             Expelled
           </button>
+          <button class="filter" data-action="filter" data-filter="Pure">
+            Pure-blood
+          </button>
+          <button class="filter" data-action="filter" data-filter="Half">
+            Half-blood
+          </button>
           <button class="filter" data-action="filter" data-filter="*">
             All
           </button>
-
+          
         </div>
         <!--sorting-->
         
@@ -62,8 +71,24 @@
       >
       House
     </button>
-    <div class ="number"></div>
-    <div class="number2"></div>
+    <button
+    data-action="sort"
+    data-sort-direction="desc"
+    data-sort="prefect"
+    >
+    Prefects
+  </button>
+  <button
+  data-action="sort"
+  data-sort-direction="desc"
+  data-sort="squad"
+  >
+  Inquisitors
+</button>
+<div id="searchWrapper">
+
+<div class ="number"></div>
+<div class="number2"></div>
         </div>
         <section id="studentlist"></section>
       </article>
@@ -86,6 +111,7 @@
           <h1 class="modal-name">
             <span id="modal-firstname"></span>
             <span id="modal-middlename"></span>
+            <span id="moadal-nickname"></span>
             <span id="modal-lastname"></span>
           </h1>
           <h2>
@@ -110,8 +136,8 @@
             <img class="student_img"  src="" alt="" />
           </div>
         
-          <span> <h2 class="prefect" data-field="prefect" data-prefect="false"></h2></span>
           <span> <h2 class="squad" data-field="squad" data-squad="false"></h2></span>
+          <span> <h2 class="prefect" data-field="prefect" data-prefect="false"></h2></span>
           <div class="name">
             <span class="firstname" data-field="firstname">First Name</span>
             <span class="middlename" data-field="middlename">Middle Name</span>
