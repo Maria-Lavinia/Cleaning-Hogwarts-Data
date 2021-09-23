@@ -13,7 +13,7 @@ const Student = {
   image: "",
   house: "",
   expel: false,
-  blood: "",
+  blood: "half",
   gender: "",
   squad: false,
   status: "Not Expelled",
@@ -21,7 +21,7 @@ const Student = {
 };
 const settings = {
   filter: "all",
-  sortBy: "firstname",
+  sortBy: "firstName",
   sortDir: "asc",
 };
 
@@ -32,8 +32,18 @@ function start() {
 }
 //buttons
 function registerButtons() {
+  document.querySelector("#searchBar").addEventListener("input", searchBar);
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+}
+// search bar
+
+function searchBar(e) {
+  const searchString = e.target.value.toLowerCase();
+  const searchedStudents = allStudents.filter((student) => {
+    return student.firstName.toLowerCase().includes(searchString) || student.lastName.toLowerCase().includes(searchString) || student.house.toLowerCase().includes(searchString);
+  });
+  displayList(searchedStudents);
 }
 
 //cleaning data
@@ -47,13 +57,14 @@ function loadJSON() {
   console.log("JSON loaded");
 }
 
-function prepareObjects(jsonData) {
-  jsonData.forEach((elm) => {
+function prepareObjects(jsonData1, jsonData2) {
+  jsonData1.forEach((elm) => {
     const student = Object.create(Student);
 
     let fullname = elm.fullname.trim();
     let house = elm.house.trim();
     let gender = elm.gender.trim();
+    //first name
     let firstName = (student.firstName = fullname.substring(fullname.lastIndexOf(), fullname.indexOf(" ")));
 
     if (fullname.indexOf(" ") >= 0) {
@@ -61,7 +72,7 @@ function prepareObjects(jsonData) {
     } else {
       firstName = student.firstName = fullname.substring(fullname.indexOf(" ") + 1);
     }
-
+    // middle name
     let middleName = fullname.substring(fullname.indexOf(" ") + 1, fullname.lastIndexOf(" "));
 
     if (middleName.includes('"')) {
@@ -70,6 +81,7 @@ function prepareObjects(jsonData) {
       student.middleName = fullname.substring(fullname.indexOf(" ") + 1, fullname.lastIndexOf(" "));
       student.middleName = student.middleName.substring(0, 1).toUpperCase() + student.middleName.substring(1);
     }
+    //last name
 
     let lastName = (student.lastName = fullname.substring(fullname.lastIndexOf(" ") + 1));
     if (fullname.indexOf(" ") >= 0) {
@@ -77,15 +89,28 @@ function prepareObjects(jsonData) {
     } else {
       lastName = student.lastName = "";
     }
+    // blood
+
+    const array = Object.values(jsonData2);
+    for (let i = 0; i < 2; i++) {
+      if (array[i].includes(lastName)) {
+        if (i == 1) {
+          student.blood = "pure";
+        }
+      }
+    }
+    // house
 
     student.house = house;
     student.house = student.house.substring(0, 1).toUpperCase() + student.house.substring(1).toLowerCase();
-
+    // images
     if (fullname.indexOf(" ") == -1) {
       student.image = student.lastName.toLowerCase() + `_${student.firstName.substring(0, 1).toLowerCase()}` + `.png`;
     } else {
       student.image = student.lastName.substring(fullname.indexOf(" ") + 1).toLowerCase() + `_${student.firstName.substring(0, 1).toLowerCase()}` + `.png`;
     }
+
+    //gender
     student.gender = gender;
     student.gender = student.gender.substring(0, 1).toUpperCase() + student.gender.substring(1).toLowerCase();
     allStudents.push(student);
@@ -117,8 +142,11 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(isRavenclaw);
   } else if (settings.filterBy === "Expelled") {
     filteredList = arrayExpelled;
+  } else if (settings.filterBy === "Half") {
+    filteredList = allStudents.filter(isHalf);
+  } else if (settings.filterBy === "Pure") {
+    filteredList = allStudents.filter(isPure);
   }
-
   return filteredList;
 }
 function isGryffindor(student) {
@@ -132,6 +160,12 @@ function isHufflepuff(student) {
 }
 function isRavenclaw(student) {
   return student.house === "Ravenclaw";
+}
+function isHalf(student) {
+  return student.blood === "half";
+}
+function isPure(student) {
+  return student.blood === "pure";
 }
 
 //sorting
@@ -184,7 +218,6 @@ function buildList() {
   displayList(sortedlist);
 }
 
-
 // template
 
 function displayStudent(student) {
@@ -192,11 +225,12 @@ function displayStudent(student) {
   const clone = document.querySelector("template#studentTemplate").content.cloneNode(true);
 
   //   // set clone data
-  clone.querySelector(".firstname").textContent = student.firstName;
-  clone.querySelector(".middlename").textContent = student.middleName;
-  clone.querySelector(".lastname").textContent = student.lastName;
+  clone.querySelector(".firstName").textContent = student.firstName;
+  clone.querySelector(".middleName").textContent = student.middleName;
+  clone.querySelector(".lastName").textContent = student.lastName;
   clone.querySelector(".house").textContent = student.house;
   clone.querySelector(".nickname").textContent = student.nickname;
+
   if (student.lastName.includes("-")) {
     clone.querySelector(".student_img").src = `images/${student.lastName.substring(student.lastName.indexOf("-") + 1).toLowerCase()}_${student.firstName[0].toLowerCase()}.png`;
   } else {
@@ -230,29 +264,29 @@ function displayStudent(student) {
   function makeSquadSlytherin() {
     if (student.house === "Slytherin") {
       makeSquad(student);
+    } else if (student.blood === "pure") {
+      makeSquad(student);
     } else {
-     cannotSquad();
+      cannotSquad();
     }
-   
   }
 
-  function makeSquad(){
-    if (student.squad=== true){
+  function makeSquad(student) {
+    if (student.squad === true) {
       student.squad = false;
-    }else{
-      student.squad=true;
+    } else {
+      student.squad = true;
     }
     buildList();
   }
 
-  function cannotSquad(){
+  function cannotSquad() {
     document.querySelector("#notAllowed").classList.add("show");
-    document.querySelector(" #notAllowed .closebutton").addEventListener("click",closeDialog);
+    document.querySelector(" #notAllowed .closebutton").addEventListener("click", closeDialog);
 
-    function closeDialog(){
-     
+    function closeDialog() {
       document.querySelector("#notAllowed").classList.remove("show");
-      document.querySelector("#notAllowed .closebutton").removeEventListener("click",closeDialog);
+      document.querySelector("#notAllowed .closebutton").removeEventListener("click", closeDialog);
     }
   }
   // make prefect
@@ -339,6 +373,7 @@ function displayStudent(student) {
       student.prefect = true;
     }
   }
+
   // modal
 
   clone.querySelector(".img_container").addEventListener("click", modal);
@@ -347,24 +382,34 @@ function displayStudent(student) {
     let expelStud = modal.querySelector("#modal-expel");
     const modalBg = document.querySelector(".modal-bg");
     modalBg.classList.remove("hide");
-
+    // display names
     expelStud.textContent = "Student Status: " + student.status;
     modal.querySelector("#modal-firstname").textContent = student.firstName;
     modal.querySelector("#modal-middlename").textContent = student.middleName;
     modal.querySelector("#modal-lastname").textContent = student.lastName;
-
+    // dispaly squad
     let squadStatus = document.querySelector("#modal-squad");
     if (student.squad === false) {
       squadStatus.style.filter = "grayscale(1)";
     } else if (student.squad === true) {
       squadStatus.style.filter = "grayscale(0)";
     }
+
+    // display prefects
     let prefectStatus = document.querySelector("#modal-prefect");
     if (student.prefect === false) {
       prefectStatus.style.filter = "grayscale(1)";
     } else if (student.prefect === true) {
       prefectStatus.style.filter = "grayscale(0)";
     }
+    // blood status
+    let bloodStatus = document.querySelector("#modal-blood");
+    if (student.blood === "half") {
+      bloodStatus.textContent = "Blood: Half-blood";
+    } else if (student.blood === "pure") {
+      bloodStatus.textContent = "Blood: Pure-blood";
+    }
+    // everything else
     modal.querySelector("#modal-gender").textContent = "Gender: " + student.gender;
     modal.querySelector(".modal-img").src = `images/${student.lastName.substring(student.lastName.indexOf("-") + 1).toLowerCase()}_${student.firstName[0].toLowerCase()}.png`;
     modal.querySelector(".modal-house").textContent = student.house;
@@ -382,13 +427,13 @@ function displayStudent(student) {
     modalBg.classList.add("hide");
   }
 
-  //   // append clone to list
+  // append clone to list
   document.querySelector("#studentlist").appendChild(clone);
 }
 function displayList(students) {
   // clear the list
   document.querySelector("#studentlist").innerHTML = "";
   students.forEach(displayStudent);
-  document.querySelector(".number").textContent = "The number of students is: " + students.length;
+  document.querySelector(".number").textContent = "The number of displayed students is: " + students.length;
   document.querySelector(".number2").textContent = "The number of expelled students is: " + arrayExpelled.length;
 }

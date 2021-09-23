@@ -9,19 +9,15 @@
   font-family: "Cinzel Decorative", cursive;
 }
 body {
-  background: radial-gradient(ellipse at bottom, #0E1A40 0%, #0E1A40 100%);
+  background: radial-gradient(ellipse at bottom, #0e1a40 0%, #0e1a40 100%);
   color: white;
 }
-
-
-
 
 /*---------------click button-------------*/
 .link {
   position: absolute;
   top: 50%;
   left: 48%;
-
 }
 
 .button {
@@ -66,6 +62,8 @@ body {
   border: 10px solid rgba(255, 255, 255, 0.475);
   border-radius: 2em;
   padding: 0.5rem;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
 .img_container {
@@ -80,11 +78,15 @@ body {
 }
 
 .img_container img {
-  width: 50%;
+  width: 60%;
 }
-.firstname,
+.img_container img:hover {
+  opacity: 50%;
+}
+
+.firstName,
 .middlename,
-.lastname {
+.lastName {
   font-size: 1.2em;
 }
 .house {
@@ -92,10 +94,12 @@ body {
   padding-bottom: 1em;
 }
 
-  .number{
-    margin-left: 1em;
-    margin-top: 1em;
-  }
+.number,
+.number2 {
+  margin-left: 1em;
+  margin-top: 1em;
+  margin-right: 1em;
+}
 /*--------------header----------------*/
 .header {
   grid-column-start: 2;
@@ -130,9 +134,9 @@ body {
   height: 30rem;
   margin: auto;
   background-color: var(--primary-color);
-  outline: 2px solid ;
+  outline: 2px solid;
   outline-offset: -20px;
-  outline-color:  rgba(255, 255, 255, 7.475);
+  outline-color: rgba(255, 255, 255, 7.475);
   color: var(--secondary-color);
   text-align: center;
   font-size: 1em;
@@ -177,6 +181,7 @@ object {
   grid-row-start: 1;
   text-align: left;
   margin-top: 2em;
+  margin-left: 0.5em;
 }
 #filter_banner button {
   background: transparent;
@@ -191,7 +196,7 @@ object {
   grid-row-start: 4;
   text-align: right;
   margin-top: 0;
-
+  margin-right: 0.5em;
 }
 #sorting_banner button {
   background: transparent;
@@ -200,7 +205,7 @@ object {
   padding-left: 2vw;
 }
 /*-----------squad------------------*/
-[data-field="squad"]::after{
+[data-field="squad"]::after {
   content: "⭐";
 }
 [data-field="squad"][data-squad="false"] {
@@ -208,7 +213,7 @@ object {
   cursor: pointer;
 }
 /*-----------prefect------------------*/
-[data-field="prefect"]::after{
+[data-field="prefect"]::after {
   content: "🎖";
 }
 
@@ -248,7 +253,7 @@ object {
   margin: 0;
   font-size: 130%;
 }
-.title{
+.title {
   text-align: center;
   padding-bottom: 1vw;
 }
@@ -268,26 +273,28 @@ object {
   background-color: transparent;
   font-size: 90%;
   color: white;
-  
 }
 
 .dialog .closebutton:hover {
   color: black;
 }
-.removeA, .removeB, .remove{
+.removeA,
+.removeB,
+.remove {
   margin-left: 178px;
   margin-top: 10px;
   align-items: center;
   display: inline;
   background-color: white;
   color: black;
-  border: 2px solid #0E1A40; 
+  border: 2px solid #0e1a40;
   border-radius: 2em;
-  padding: 0.5vw; 
- 
+  padding: 0.5vw;
 }
 
-.removeA:hover, .removeB:hover, remove:hover{
+.removeA:hover,
+.removeB:hover,
+remove:hover {
   opacity: 50%;
 }
 
@@ -296,7 +303,6 @@ object {
 [data-field="expel"] {
   opacity: 100%;
   text-align: right;
-
 }
 [data-field="expel"]:hover {
   opacity: 100%;
@@ -309,6 +315,13 @@ object {
   grid-template-columns: 1% 98% 1%;
   grid-template-rows: auto;
 }
+
+/*-------------------search bar--------------*/
+
+#searchWrapper input {
+  margin-left: 20px;
+}
+
 /*---------------mobile---------------*/
 @media only screen and (max-width: 700px) {
   .grid-whole-page {
@@ -329,7 +342,7 @@ object {
 object {
   width: 5em;
 }
-.sortby{
+.sortby {
   text-decoration: underline;
 }
 
