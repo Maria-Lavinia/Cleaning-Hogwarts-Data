@@ -35,6 +35,7 @@ function registerButtons() {
   document.querySelector("#searchBar").addEventListener("input", searchBar);
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+  // document.querySelector(".hack").addEventListener("click", hackTheSystem);
 }
 // search bar
 
@@ -373,6 +374,7 @@ function displayStudent(student) {
       student.prefect = true;
     }
   }
+  // hack the system
 
   // modal
 
@@ -387,6 +389,8 @@ function displayStudent(student) {
     modal.querySelector("#modal-firstname").textContent = student.firstName;
     modal.querySelector("#modal-middlename").textContent = student.middleName;
     modal.querySelector("#modal-lastname").textContent = student.lastName;
+    modal.querySelector("#moadal-nickname").textContent = student.nickname;
+
     // dispaly squad
     let squadStatus = document.querySelector("#modal-squad");
     if (student.squad === false) {

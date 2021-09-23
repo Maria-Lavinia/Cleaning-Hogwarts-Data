@@ -85,7 +85,7 @@ body {
 }
 
 .firstName,
-.middlename,
+.middleName,
 .lastName {
   font-size: 1.2em;
 }
@@ -331,6 +331,49 @@ remove:hover {
   margin-left: 20px;
 }
 
+
+/*------------------hack the system--------------------------*/
+
+.hack{
+  position: relative;
+  background-color: #7f0909;
+  border: none;
+  font-size: 28px;
+  color: #FFFFFF;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 2em;
+ margin-left: 42vw;
+ margin-bottom: 3vw;
+
+}
+
+
+.hack::after{
+  content: "";
+  background: #0e1a40;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.hack:active:after{
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+
+}
 /*---------------mobile---------------*/
 @media only screen and (max-width: 700px) {
   .grid-whole-page {
