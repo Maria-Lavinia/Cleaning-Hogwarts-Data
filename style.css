@@ -96,8 +96,9 @@ body {
 
 .number,
 .number2 {
+  text-align: center;
   margin-left: 1em;
-  margin-top: 1em;
+  margin-top: 2em;
   margin-right: 1em;
 }
 /*--------------header----------------*/
@@ -195,7 +196,7 @@ object {
   grid-column-start: 2;
   grid-row-start: 4;
   text-align: right;
-  margin-top: 0;
+  margin-top: 1vw;
   margin-right: 0.5em;
 }
 #sorting_banner button {
@@ -205,6 +206,11 @@ object {
   padding-left: 2vw;
 }
 /*-----------squad------------------*/
+.squad{
+  font-size: 16px;
+  margin-bottom: 1vw;
+  margin-top: 1vw;
+}
 [data-field="squad"]::after {
   content: "⭐";
 }
@@ -213,6 +219,9 @@ object {
   cursor: pointer;
 }
 /*-----------prefect------------------*/
+.prefect{
+  font-size: 16px;
+}
 [data-field="prefect"]::after {
   content: "🎖";
 }
