@@ -25,6 +25,21 @@ const settings = {
   sortDir: "asc",
 };
 
+const meStudent = {
+  firstName: "Maria",
+  lastName: "Otelea",
+  middleName: "Lavinia",
+  nickname: "",
+  image: "images/otelea_m.png",
+  house: "Slytherin",
+  expel: false,
+  blood: "pure",
+  gender: "girl",
+  squad: false,
+  status: "Not Expelled",
+  prefect: false,
+};
+
 function start() {
   console.log("ready");
   registerButtons();
@@ -35,7 +50,7 @@ function registerButtons() {
   document.querySelector("#searchBar").addEventListener("input", searchBar);
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
-  // document.querySelector(".hack").addEventListener("click", hackTheSystem);
+  document.querySelector(".hack").addEventListener("click", hackTheSystem);
 }
 // search bar
 
@@ -45,6 +60,11 @@ function searchBar(e) {
     return student.firstName.toLowerCase().includes(searchString) || student.lastName.toLowerCase().includes(searchString) || student.house.toLowerCase().includes(searchString);
   });
   displayList(searchedStudents);
+}
+//hack the system
+function hackTheSystem() {
+  allStudents.push(meStudent);
+  buildList();
 }
 
 //cleaning data
@@ -245,17 +265,33 @@ function displayStudent(student) {
   clone.querySelector("[data-field='expel']").dataset.expel = student.expel;
 
   clone.querySelector("[data-field='expel']").addEventListener("click", clickExpelled);
+  if (student.firstName === "Maria") {
+    clone.querySelector("[data-field='expel']").addEventListener("click", cannotExpell);
+  }
 
   function clickExpelled() {
-    student.status = "Expelled";
-    const indexOfCurrentStu = allStudents.findIndex((element) => element.firstName === student.firstName);
-    const arrayOfRemovedStu = allStudents.splice(indexOfCurrentStu, 1);
+    if (student.firstName !== "Maria") {
+      student.status = "Expelled";
 
-    arrayExpelled.push(arrayOfRemovedStu[0]);
+      const indexOfCurrentStu = allStudents.findIndex((element) => element.firstName === student.firstName);
+      const arrayOfRemovedStu = allStudents.splice(indexOfCurrentStu, 1);
 
-    console.log("clickExpelled inex in array", allStudents);
-    console.log("expelled students", arrayExpelled);
-    buildList();
+      arrayExpelled.push(arrayOfRemovedStu[0]);
+      console.log("clickExpelled index in array", allStudents);
+      console.log("expelled students", arrayExpelled);
+      buildList();
+    }
+  }
+
+  function cannotExpell() {
+    student.status = "Not Expelled";
+    document.querySelector("#notExpelled").classList.add("show");
+    document.querySelector("#notExpelled .closebutton").addEventListener("click", closeDialog);
+  }
+
+  function closeDialog() {
+    document.querySelector("#notExpelled").classList.remove("show");
+    document.querySelector("#notExpelled .closebutton").removeEventListener("click", closeDialog);
   }
 
   //make squad
@@ -374,7 +410,6 @@ function displayStudent(student) {
       student.prefect = true;
     }
   }
-  // hack the system
 
   // modal
 
