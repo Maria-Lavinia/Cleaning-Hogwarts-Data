@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", start);
 const arrayExpelled = [];
 const allStudents = [];
 const Student = {
-  firstName: "",
+  firstName: "",  
   lastName: "",
   middleName: "",
   nickname: "",
@@ -40,7 +40,6 @@ const meStudent = {
   prefect: false,
 };
 
-
 function start() {
   console.log("ready");
   registerButtons();
@@ -54,23 +53,6 @@ function registerButtons() {
   document.querySelector(".hack").addEventListener("click", hackTheSystem);
 }
 
-//hack the system
-
-function hackTheSystem() {
-  allStudents.forEach(randomBloodStatus);
-  allStudents.push(meStudent);
-  buildList();
-}
-
-function randomBloodStatus(student) {
-  if (student.blood === "pure") {
-    const types = ["Muggle-blood", "half"];
-    const randomNumber = Math.floor(Math.random() * 2);
-    student.blood = types[randomNumber];
-  } else if (student.blood === "half") {
-    student.blood = "Pure-blood";
-  }
-}
 // search bar
 
 function searchBar(e) {
@@ -323,35 +305,13 @@ function displayStudent(student) {
   }
 
   function makeSquad(student) {
-    if (student.squad === true) {
+  if (student.squad === true) {
       student.squad = false;
-    } else if(hackTheSystem) {
-      student.squad = true;
-      notSquad(student);
-    }else {
+    } else {
       student.squad = true;
     }
     buildList();
   }
-
-  // system hacked for inquistitorial squad
-
-  function notSquad(student){
-    
-    if (student.squad === true) {
-      setTimeout(() => {
-        student.squad = false;
-        document.querySelector("#noSquad").classList.add("show");
-        document.querySelector("#noSquad .closebutton").addEventListener("click", closeDialog);
-        buildList();
-      }, 1000);
-    }
-    function closeDialog() {
-      document.querySelector("#noSquad").classList.remove("show");
-      document.querySelector("#noSquad .closebutton").removeEventListener("click", closeDialog);
-    }
-  }
-  
 
   function cannotSquad() {
     document.querySelector("#notAllowed").classList.add("show");
@@ -381,7 +341,7 @@ function displayStudent(student) {
     const numberOfPrefects = prefects.length;
     const other = prefects.filter((student) => student.house === selectedStudent.house).shift();
     if (other !== undefined) {
-      console.log("there can only be one prefect of each house");
+      console.log("there can only be 2 prefect of each house");
       removeOther(other);
     } else if (numberOfPrefects >= 2) {
       console.log("there can only be 2 winners");
@@ -514,3 +474,46 @@ function displayList(students) {
   document.querySelector(".number").textContent = "The number of displayed students is: " + students.length;
   document.querySelector(".number2").textContent = "The number of expelled students is: " + arrayExpelled.length;
 }
+
+//hack the system
+
+function hackTheSystem() {
+  // allStudents.forEach(makeSquadHack);
+  allStudents.forEach(randomBloodStatus);
+  allStudents.push(meStudent);
+  buildList();
+}
+
+function randomBloodStatus(student) {
+  if (student.blood === "pure") {
+    const types = ["Muggle-blood", "half"];
+    const randomNumber = Math.floor(Math.random() * 2);
+    student.blood = types[randomNumber];
+  } else if (student.blood === "half") {
+    student.blood = "Pure-blood";
+  }
+}
+// function makeSquadHack(student){
+//   if (student.squad === true) {
+//     student.squad = false;
+//   }else if (hackTheSystem) {
+//       student.squad = true;
+//       notSquad(student);
+//     } else {
+//       student.squad = true;
+//     }
+//   }
+// function notSquad(student) {
+//   if (student.squad === true) {
+//     setTimeout(() => {
+//       student.squad = false;
+//       document.querySelector("#noSquad").classList.add("show");
+//       document.querySelector("#noSquad .closebutton").addEventListener("click", closeDialog);
+//       buildList();
+//     }, 1000);
+//   }}
+
+//   function closeDialog() {
+//     document.querySelector("#noSquad").classList.remove("show");
+//     document.querySelector("#noSquad .closebutton").removeEventListener("click", closeDialog);
+//   }

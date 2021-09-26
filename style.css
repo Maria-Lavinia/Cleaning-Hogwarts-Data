@@ -335,17 +335,17 @@ remove:hover {
   position: relative;
   background-color: #7f0909;
   border: none;
-  font-size: 28px;
+  font-size: 10px;
   color: #ffffff;
   padding: 20px;
-  width: 200px;
+  width: 100px;
   text-align: center;
   transition-duration: 0.4s;
   text-decoration: none;
   overflow: hidden;
   cursor: pointer;
   border-radius: 2em;
-  margin-left: 42vw;
+  margin-left: 90vw;
   margin-bottom: 3vw;
 }
 
